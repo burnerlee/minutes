@@ -1,33 +1,44 @@
 {
-  "manifest_version": 3,
-  "name": "Minutes",
-  "version": "0.1.0",
-  "description": "My Chrome Extension",
+  "manifest_version": 2,
+
+  "name": "Chrome Audio Capture",
+  "description": "This extension captures the audio on the current tab and saves the output file on your computer when the capture is complete",
+  "version": "1.1.5",
   "icons": {
-    "16": "icons/icon_16.png",
-    "32": "icons/icon_32.png",
-    "48": "icons/icon_48.png",
-    "128": "icons/icon_128.png"
+    "128":"icon.png"
+    },
+
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html",
+    "default_title": "Open Chrome Audio Capture interface"
   },
+  "options_page": "options.html",
   "background": {
     "service_worker": "background.js"
   },
-  "action": {
-    "default_title": "Minutes",
-    "default_popup": "popup.html"
-  },
   "permissions": [
-    "storage"
+    "tabCapture",
+    "downloads",
+    "storage",
+    "identity",
+    "<all_urls>",
+    "tabCapture"
   ],
-  "content_scripts": [
-    {
-      "matches": [
-        "<all_urls>"
-      ],
-      "run_at": "document_idle",
-      "js": [
-        "contentScript.js"
-      ]
+  "commands": {
+    "start": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "Command+Shift+U"
+      },
+      "description": "Start Capture"
+    },
+    "stop": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+X",
+        "mac": "MacCtrl+Shift+X"
+      },
+      "description": "Stop Capture"
     }
-  ]
+  }
 }
